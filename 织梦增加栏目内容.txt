@@ -1,0 +1,362 @@
+怎么样，我一下子增加了5个，是否威武哈。
+某些情况下需要这么多滴，这个时候频道页就可以做很多效果了，比如Tabs切换效果。 
+现在开始发布修改方法：
+
+首先要再数据库中添加相应的字段
+
+SQL语句  
+ALTER TABLE `你的数据库表前缀_arctype` ADD `content1` TEXT NOT NULL AFTER `content` ;
+
+如果只增加一次的话就运行一次就可以了，如果增加多个的话就继续运行，但是要注意添加的字段名，我懒的起名，起的字段名加数字，
+
+
+ALTER TABLE `你的数据库表前缀_arctype` ADD `content2` TEXT NOT NULL AFTER `content1` ;
+
+ALTER TABLE `你的数据库表前缀_arctype` ADD `content3` TEXT NOT NULL AFTER `content2` ;
+
+ALTER TABLE `你的数据库表前缀_arctype` ADD `content4` TEXT NOT NULL AFTER `content3` ;
+
+ALTER TABLE `你的数据库表前缀_arctype` ADD `content5` TEXT NOT NULL AFTER `content4` ;
+......
+
+
+
+
+
+第二步  dede\catalog_edit.php
+
+在      `content`='$content', 下 增加
+
+  `content1`='$content1',
+  `content2`='$content2',
+  `content3`='$content3',
+  `content4`='$content4',
+  `content5`='$content5',
+
+这里是保存数据用的。
+
+
+
+
+第三步是最繁琐的，也是最容易出错的，
+
+dede\templets\catalog_edit.htm
+
+
+修改  
+
+<table width="100%" border="0" cellspacing="0" id="head1" cellpadding="0">
+          <tr> 
+            <td colspan="2" bgcolor="#FFFFFF" align="left">
+           <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="84" height="24" align="center" background="images/itemnote1.gif"> 常规选项 </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem2()"><u>高级选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem3()"><u>栏目内容</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem4()"><u>附加内容1</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem5()"><u>附加内容2</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem7()"><u>附加内容3</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem8()"><u>附加内容4</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem9()"><u>附加内容5</u>< /a> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table> 
+
+
+红色是新增加的代码 由于有多个，而且重复，也只是轻微的变化，我直接贴出全部的代码部分
+
+<table width="100%" border="0" cellspacing="0" id="head1" cellpadding="0">
+          <tr> 
+            <td colspan="2" bgcolor="#FFFFFF" align="left">
+           <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="84" height="24" align="center" background="images/itemnote1.gif"> 常规选项 </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem2()"><u>高级选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem3()"><u>栏目内容</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem4()"><u>附加内容1</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem5()"><u>附加内容2</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem7()"><u>附加内容3</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem8()"><u>附加内容4</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem9()"><u>附加内容5</u>< /a> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table> 
+        
+        <table width="100%" border="0" cellspacing="0" id="head2" cellpadding="0" style="display:none">
+          <tr>
+            <td colspan="2" bgcolor="#FFFFFF"  style="text-align:left;">
+          <table height="24" border="0" cellpadding="0" cellspacing="0">
+                <tr> 
+                  <td width="84" align="center" background="images/itemnote2.gif" bgcolor="#F2F7DF"& gt;<a href="#" onClick="ShowItem1()"><u>常规选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote1.gif"> 高级选项 </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem3()"><u>栏目内容</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem4()"><u>附加内容1</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem5()"><u>附加内容2</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem7()"><u>附加内容3</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem8()"><u>附加内容4</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem9()"><u>附加内容5</u>< /a> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+       </table>
+       
+       <table width="100%" border="0" cellspacing="0" id="head3" cellpadding="0" style="display:none">
+          <tr>
+            <td colspan="2" bgcolor="#FFFFFF" style="text-align:left;">
+             <table height="24" border="0" cellpadding="0" cellspacing="0">
+                <tr> 
+                  <td width="84" align="center" background="images/itemnote2.gif" bgcolor="#F2F7DF"& gt;<a href="#" onClick="ShowItem1()"><u>常规选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem2()"><u>高级选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote1.gif"> 栏目内容 </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem4()"><u>附加内容1</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem5()"><u>附加内容2</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem6()"><u>附加内容3</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem7()"><u>附加内容4</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem8()"><u>附加内容5</u>< /a> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+       </table>
+    
+    <table width="100%" border="0" cellspacing="0" id="head4" cellpadding="0" style="display:none">
+          <tr>
+            <td colspan="2" bgcolor="#FFFFFF" style="text-align:left;">
+             <table height="24" border="0" cellpadding="0" cellspacing="0">
+                <tr> 
+                  <td width="84" align="center" background="images/itemnote2.gif" bgcolor="#F2F7DF"& gt;<a href="#" onClick="ShowItem1()"><u>常规选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem2()"><u>高级选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem3()"><u>栏目内容</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote1.gif"> 附加内容1 </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem5()"><u>附加内容2</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem6()"><u>附加内容3</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem7()"><u>附加内容4</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem8()"><u>附加内容5</u>< /a> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+       </table>
+    
+    <table width="100%" border="0" cellspacing="0" id="head5" cellpadding="0" style="display:none">
+          <tr>
+            <td colspan="2" bgcolor="#FFFFFF" style="text-align:left;">
+             <table height="24" border="0" cellpadding="0" cellspacing="0">
+                <tr> 
+                  <td width="84" align="center" background="images/itemnote2.gif" bgcolor="#F2F7DF"& gt;<a href="#" onClick="ShowItem1()"><u>常规选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem2()"><u>高级选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem3()"><u>栏目内容</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem4()"><u>附加内容1</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote1.gif"> 附加内容2 </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem6()"><u>附加内容3</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem7()"><u>附加内容4</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem8()"><u>附加内容5</u>< /a> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+       </table>
+    
+    <table width="100%" border="0" cellspacing="0" id="head6" cellpadding="0" style="display:none">
+          <tr>
+            <td colspan="2" bgcolor="#FFFFFF" style="text-align:left;">
+             <table height="24" border="0" cellpadding="0" cellspacing="0">
+                <tr> 
+                  <td width="84" align="center" background="images/itemnote2.gif" bgcolor="#F2F7DF"& gt;<a href="#" onClick="ShowItem1()"><u>常规选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem2()"><u>高级选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem3()"><u>栏目内容</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem4()"><u>附加内容1</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem5()"><u>附加内容2</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote1.gif">附加内容3 </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem7()"><u>附加内容4</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem8()"><u>附加内容5</u>< /a> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+       </table>
+    
+    
+     <table width="100%" border="0" cellspacing="0" id="head7" cellpadding="0" style="display:none">
+          <tr>
+            <td colspan="2" bgcolor="#FFFFFF" style="text-align:left;">
+             <table height="24" border="0" cellpadding="0" cellspacing="0">
+                <tr> 
+                  <td width="84" align="center" background="images/itemnote2.gif" bgcolor="#F2F7DF"& gt;<a href="#" onClick="ShowItem1()"><u>常规选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem2()"><u>高级选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem3()"><u>栏目内容</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem4()"><u>附加内容1</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem5()"><u>附加内容2</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem6()"><u>附加内容3</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote1.gif">附加内容4 </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem8()"><u>附加内容5</u>< /a> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+       </table>
+    
+    <table width="100%" border="0" cellspacing="0" id="head8" cellpadding="0" style="display:none">
+          <tr>
+            <td colspan="2" bgcolor="#FFFFFF" style="text-align:left;">
+             <table height="24" border="0" cellpadding="0" cellspacing="0">
+                <tr> 
+                  <td width="84" align="center" background="images/itemnote2.gif" bgcolor="#F2F7DF"& gt;<a href="#" onClick="ShowItem1()"><u>常规选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem2()"><u>高级选项</u>< /a> </td>
+                  <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem3()"><u>栏目内容</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem4()"><u>附加内容1</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem5()"><u>附加内容2</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem6()"><u>附加内容3</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote2.gif"& gt;<a href="#" onClick="ShowItem7()"><u>附加内容4</u>< /a> </td>
+      <td width="84" align="center" background="images/itemnote1.gif">附加内容5 </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+       </table>
+
+
+以上只是切换标题部分，现在我们来修改切换的内容部分
+
+
+
+我直接贴出了内容部分，照着增加就是
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #cfcfcf;background:#ffffff;display:none;text-align:left;" id="ctset">
+<tr> 
+<td height="28"> 说明：栏目内容是替代原来栏目单独页的更灵活的一种方式，可在栏目模板中用{dede:field.content/}调用，通常用于企业简介之类的用途。</td>
+</tr>
+<tr> 
+<td style="padding:10px;">
+<?php
+GetEditor("content",$myrow['content'],"450","Default","print","false");
+?> 
+</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #cfcfcf;background:#ffffff;display:none;text-align:left;" id="ctset1">
+<tr> 
+<td height="28"> 说明：附加1111111111111栏目内容是替代原来栏目单独页的更灵活的一种方式，可在栏目模板中用{dede:field.content/}调用，通常用于企业简介之类的用途。</td>
+</tr>
+<tr> 
+<td style="padding:10px;">
+<?php
+GetEditor("content1",$myrow['content1'],"450","Default","print","false");
+?> 
+</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #cfcfcf;background:#ffffff;display:none;text-align:left;" id="ctset2">
+<tr> 
+<td height="28"> 说明：附加1222222222221栏目内容是替代原来栏目单独页的更灵活的一种方式，可在栏目模板中用{dede:field.content/}调用，通常用于企业简介之类的用途。</td>
+</tr>
+<tr> 
+<td style="padding:10px;">
+<?php
+GetEditor("content2",$myrow['content2'],"450","Default","print","false");
+?> 
+</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #cfcfcf;background:#ffffff;display:none;text-align:left;" id="ctset3">
+<tr> 
+<td height="28"> 说明：附加33333333栏目内容是替代原来栏目单独页的更灵活的一种方式，可在栏目模板中用{dede:field.content/}调用，通常用于企业简介之类的用途。</td>
+</tr>
+<tr> 
+<td style="padding:10px;">
+<?php
+GetEditor("content3",$myrow['content3'],"450","Default","print","false");
+?> 
+</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #cfcfcf;background:#ffffff;display:none;text-align:left;" id="ctset4">
+<tr> 
+<td height="28"> 说明：附加44444444444411栏目内容是替代原来栏目单独页的更灵活的一种方式，可在栏目模板中用{dede:field.content/}调用，通常用于企业简介之类的用途。</td>
+</tr>
+<tr> 
+<td style="padding:10px;">
+<?php
+GetEditor("content4",$myrow['content4'],"450","Default","print","false");
+?> 
+</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #cfcfcf;background:#ffffff;display:none;text-align:left;" id="ctset5">
+<tr> 
+<td height="28"> 说明：附加15555555111栏目内容是替代原来栏目单独页的更灵活的一种方式，可在栏目模板中用{dede:field.content/}调用，通常用于企业简介之类的用途。</td>
+</tr>
+<tr> 
+<td style="padding:10px;">
+<?php
+GetEditor("content5",$myrow['content5'],"450","Default","print","false");
+?> 
+</td>
+</tr>
+</table>
+
+
+最后是JS部分 
+
+这里也挺繁琐，只是注意就行了，也没难度。
+[quote]function ShowItem1(){
+ShowObj('head1'); ShowObj('needset');
+HideObj('head2'); HideObj('adset');
+HideObj('head3'); HideObj('ctset');
+HideObj('head4'); HideObj('ctset1');
+HideObj('head5'); HideObj('ctset2');
+HideObj('head6'); HideObj('ctset3');
+HideObj('head7'); HideObj('ctset4');
+HideObj('head8'); HideObj('ctset5');
+}
+
+function ShowItem2(){
+HideObj('head1'); HideObj('needset');
+ShowObj('head2'); ShowObj('adset');
+HideObj('head3'); HideObj('ctset');
+HideObj('head4'); HideObj('ctset1');
+HideObj('head5'); HideObj('ctset2');
+HideObj('head6'); HideObj('ctset3');
+HideObj('head7'); HideObj('ctset4');
+HideObj('head8'); HideObj('ctset5');
+}
+function ShowItem3(){
+HideObj('head1'); HideObj('needset');
+HideObj('head2'); HideObj('adset');
+ShowObj('head3'); ShowObj('ctset');
+HideObj('head4'); HideObj('ctset1');
+HideObj('head5'); HideObj('ctset2');
+HideObj('head6'); HideObj('ctset3');
+HideObj('head7'); HideObj('ctset4');
+HideObj('head8'); HideObj('ctset5');
+}
+function ShowItem4(){
+HideObj('head1'); HideObj('needset');
+HideObj('head2'); HideObj('adset');
+HideObj('head3'); HideObj('ctset');
+ShowObj('head4'); ShowObj('ctset1');
+HideObj('head5'); HideObj('ctset2');
+HideObj('head6'); HideObj('ctset3');
+HideObj('head7'); HideObj('ctset4');
+HideObj('head8'); HideObj('ctset5');
+}
+function ShowItem5(){
+HideObj('head1'); HideObj('needset');
+HideObj('head2'); HideObj('adset');
+HideObj('head3'); HideObj('ctset');
+HideObj('head4'); HideObj('ctset1');
+ShowObj('head5'); ShowObj('ctset2');
+HideObj('head6'); HideObj('ctset3');
+
+至此就修改好了。 
+  文章地址：http://www.55of.com/cms/dedecms/126.html 

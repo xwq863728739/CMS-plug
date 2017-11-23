@@ -1,0 +1,81 @@
+1. 首先，给栏目分类表`dede_arctype`表增加缩略图字段`typeimg`，用phpMyAdmin或其他数据库管理工具，直接在数据表中添加该字段，或者运行下面的SQL语句：
+
+alter table `dede_arctype` add `typeimg` char(100) NOT NULL default '';
+2. 修改页面，在表单中添加相应的字段，涉及到的页面有：
+dede/catalog_add.php
+dede/catalog_edit.php
+dede/templets/catalog_add.htm
+dede/templets/catalog_edit.htm
+2.1 打开dede/templets/catalog_add.htm，查找
+
+<tr>
+    <td class='bline' height="26" style="padding-left:10px;"><font color='red'>栏目名称：</font></td>
+    <td class='bline'><input name="typename" type="text" id="typename" size="30" class="iptxt" /></td>
+</tr>
+在其下面加上如下代码：
+
+<tr>
+    <td class='bline' height="26" style="padding-left:10px;"><font color='red'>栏目图片：</font></td>
+    <td class='bline'>
+        <input name="typeimg" type="text" style="width:250px" id="typeimg" class="alltxt" value="" />
+        <input type="button" name="set9" value="浏览... "class="coolbg np" style="width:60px" onClick="SelectImage('form1.typeimg','');" />
+    </td>
+</tr>
+并在<head></head>之间引入如下js：
+
+<script language="javascript" src="js/main.js"></script>
+2.2 打开dede/catalog_add.php页面，保存上传栏目图片的内容，查找
+
+$queryTemplate = "INSERT INTO
+在
+
+(reid,topid,sortrank,typename
+的后面添加 ,typeimg 字段，再找到
+
+('~reid~','~topid~','~rank~','~typename~',
+在其后面添加 ,’~typeimg~’ 字段，接着查找
+
+$in_query = "INSERT INTO
+在
+
+(reid,topid,sortrank,typename
+后面同样添加 ,typeimg 字段，并在
+
+('$reid','$topid','$sortrank','$typename'
+后面添加 ,’$typeimg’ 字段。
+2.3 打开dede/templets/catalog_edit.htm页面，查找
+
+<tr> 
+    <td class='bline' height="26" style="padding-left:10px;"><font color='red'>栏目名称：</font></td>
+    <td class='bline'><input name="typename" type="text" id="typename" size="30" value="<?php echo $myrow['typename']?>" class="iptxt" /></td>
+</tr>
+在其下面添加：
+
+<tr>
+    <td class='bline' height="26" style="padding-left:10px;"><font color='red'>栏目图片：</font></td>
+    <td class='bline'>
+        <input name="typeimg" type="text" style="width:250px" id="typeimg" class="alltxt" value="<?php echo $myrow['typeimg']?>" />
+        <input type="button" name="set9" value="浏览... "class="coolbg np" style="width:60px" onClick="SelectImage('form1.typeimg','');" />
+    </td>
+</tr>
+并在<head></head>之间引入下面的js文件
+
+<script language='javascript' src="js/main.js"></script>
+2.4 打开dede/catalog_edit.php，查找
+
+$upquery = "UPDATE `dede_arctype` SET
+在
+
+typename='$typename',
+的后面添加
+
+ typeimg='$typeimg',
+然后保存。
+
+
+调用方式
+<div class="banner">
+    <img src="{dede:field.typeimg /}" />
+</div>
+
+原文网址:https://www.genban.org/news/dedecms-7577.html
